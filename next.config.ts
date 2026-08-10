@@ -1,7 +1,16 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
 
-const nextConfig: NextConfig = {
-  /* config options here */
+  // opcional (pra acessar do celular)
+  allowedDevOrigins: ["192.168.101.4"],
 };
 
-export default nextConfig;
+module.exports = nextConfig;
