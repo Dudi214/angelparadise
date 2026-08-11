@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const font = Playfair_Display({
@@ -19,8 +18,55 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Angel Paradise",
-  description: "Passeios privativos em Angra dos Reis",
+  title: {
+    default: "Angel Paradise | Passeios de Lancha e Barco Privativo em Angra dos Reis",
+    template: "%s | Angel Paradise",
+  },
+  description:
+    "Aluguel de lanchas e passeios privativos em Angra dos Reis e Ilha Grande. Roteiros exclusivos, conforto e segurança para sua família. Reserve seu passeio!",
+  keywords: [
+    "Passeio de lancha Angra dos Reis",
+    "Aluguel de barco Angra dos Reis",
+    "Passeio privativo Ilha Grande",
+    "Lancha privativa Angra",
+    "Angel Paradise Angra",
+    "Roteiros de lancha Angra",
+  ],
+  authors: [{ name: "Angel Paradise" }],
+  creator: "Angel Paradise",
+  metadataBase: new URL("https://angelparadise.vercel.app"), // Substitua pelo seu domínio final
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Angel Paradise | Passeios Privativos em Angra dos Reis",
+    description:
+      "A melhor experiência em passeios de lancha privativos em Angra dos Reis e Ilha Grande. Viva momentos inesquecíveis!",
+    url: "https://angelparadise.vercel.app", // Substitua pelo seu domínio final
+    siteName: "Angel Paradise",
+    images: [
+      {
+        url: "/og-image.jpeg", // Imagem que aparece ao compartilhar o link no WhatsApp/Instagram
+        width: 1200,
+        height: 630,
+        alt: "Angel Paradise - Passeios de Lancha em Angra dos Reis",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/logo.png", type: "image/png" }, // Sua logo aparecendo na aba do navegador
+    ],
+    shortcut: "/logo.png",
+    apple: "/logo.png", // Para telas de atalho do iPhone/iOS
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

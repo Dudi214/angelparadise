@@ -7,6 +7,7 @@ export default function Roteiros() {
     {
       titulo: "Ilhas Exclusivas",
       destaque: "O cartão postal de Angra",
+      imagem: "/paissagem1.jpeg",
       descricao:
         "Águas cristalinas, cenários paradisíacos e paradas nas praias mais famosas. Ideal para quem quer viver o melhor de Angra.",
       paradas: [
@@ -19,6 +20,7 @@ export default function Roteiros() {
     {
       titulo: "Ilha Grande Experience",
       destaque: "Mergulho e natureza",
+      imagem: "/paissagem2.jpeg",
       descricao:
         "Um mergulho na vida marinha com águas transparentes e natureza preservada. Perfeito para snorkel.",
       paradas: [
@@ -31,6 +33,7 @@ export default function Roteiros() {
     {
       titulo: "Águas Tranquilas",
       destaque: "Relaxamento total",
+      imagem: "/paissagem3.jpeg",
       descricao:
         "Ambiente calmo, águas mornas e conforto total. Ideal para famílias e quem busca tranquilidade.",
       paradas: [
@@ -42,6 +45,7 @@ export default function Roteiros() {
     {
       titulo: "Roteiro Personalizado",
       destaque: "100% do seu jeito",
+      imagem: "/paissagem1.jpeg",
       descricao:
         "Você escolhe tudo: praias, horários e experiência. Um passeio exclusivo e totalmente privativo.",
       paradas: [
@@ -51,6 +55,13 @@ export default function Roteiros() {
       ],
     },
   ];
+
+  const handleWhatsAppRedirect = (e: React.MouseEvent<HTMLAnchorElement>, titulo: string) => {
+    e.stopPropagation(); // Evita interferência de eventos do Framer Motion
+    const mensagem = encodeURIComponent(`Olá! Gostaria de saber mais informações sobre o roteiro *${titulo}*.`);
+    const url = `https://wa.me/5524999695994?text=${mensagem}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <section className="py-24 px-6 bg-gradient-to-b from-white via-slate-50 to-white">
@@ -91,45 +102,55 @@ export default function Roteiros() {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.15, duration: 0.5 }}
-              className="relative group rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl p-6 flex flex-col hover:-translate-y-3 hover:shadow-2xl transition-all duration-500"
+              className="relative group rounded-2xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl flex flex-col hover:-translate-y-3 hover:shadow-2xl transition-all duration-500"
             >
 
-              {/* efeito brilho */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
-                <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/30 blur-2xl rotate-45"></div>
+              {/* IMAGEM DO CARD */}
+              <div className="relative h-48 w-full overflow-hidden">
+                <img
+                  src={r.imagem}
+                  alt={r.titulo}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+                <span className="absolute top-3 left-3 bg-teal-600/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
+                  {r.destaque}
+                </span>
               </div>
 
-              <p className="text-teal-600 text-xs font-bold uppercase mb-2">
-                {r.destaque}
-              </p>
+              {/* CONTEÚDO DO CARD */}
+              <div className="p-6 flex flex-col flex-1">
+                <h4 className="text-xl font-bold mb-2 text-slate-900">
+                  {r.titulo}
+                </h4>
 
-              <h4 className="text-xl font-bold mb-2">
-                {r.titulo}
-              </h4>
+                <p className="text-gray-600 text-sm mb-4">
+                  {r.descricao}
+                </p>
 
-              <p className="text-gray-600 text-sm mb-4">
-                {r.descricao}
-              </p>
+                <ul className="text-sm text-gray-700 space-y-1 mb-6">
+                  {r.paradas.map((p, i) => (
+                    <li key={i}>• {p}</li>
+                  ))}
+                </ul>
 
-              <ul className="text-sm text-gray-700 space-y-1 mb-6">
-                {r.paradas.map((p, i) => (
-                  <li key={i}>• {p}</li>
-                ))}
-              </ul>
+                {/* GATILHO */}
+                <p className="text-xs text-gray-400 mb-3 mt-auto">
+                  🔥 Alta procura essa semana
+                </p>
 
-              {/* gatilho */}
-              <p className="text-xs text-gray-400 mb-3">
-                🔥 Alta procura essa semana
-              </p>
+                {/* BOTÃO COM NAVEGAÇÃO GARANTIDA EM NOVA GUIA */}
+                <a
+                  href={`https://wa.me/5524999695994?text=${encodeURIComponent(`Olá! Gostaria de saber mais informações sobre o roteiro *${r.titulo}*.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => handleWhatsAppRedirect(e, r.titulo)}
+                  className="relative z-10 cursor-pointer bg-gradient-to-r from-teal-500 to-cyan-600 text-white py-2.5 rounded-xl text-center font-semibold hover:scale-105 transition shadow-md block"
+                >
+                  Falar com Consultor
+                </a>
+              </div>
 
-              {/* botão */}
-              <a
-                href="https://wa.me/5524999695994?text=Quero reservar esse roteiro"
-                target="_blank"
-                className="mt-auto bg-gradient-to-r from-teal-500 to-cyan-600 text-white py-2 rounded-xl text-center font-semibold hover:scale-105 transition"
-              >
-                Falar com Consultor
-              </a>
             </motion.div>
           ))}
 

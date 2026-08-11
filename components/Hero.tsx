@@ -82,7 +82,7 @@ export default function Hero() {
 
           {/* CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {["/jetski.jpg", "/lancha.jpg", "/lancha2.jpg"].map((img, i) => (
+            {["/jet3.jpeg", "/ntbot.jpeg", "/lancha.jpg"].map((img, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 80 }}
