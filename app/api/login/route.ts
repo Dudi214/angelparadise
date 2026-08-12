@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
@@ -52,11 +53,21 @@ export async function POST(req: Request) {
       );
     }
 
-    // Gera um token fixo e seguro baseado no AUTH_SECRET + ADMIN_EMAIL
+    // Gera o token HMAC seguro
     const sessionToken = crypto
       .createHmac("sha256", authSecret)
       .update(adminEmail)
       .digest("hex");
+
+    // Usa o helper nativo de cookies do Next.js
+    const cookieStore = await cookies();
+    cookieStore.set("admin_session", sessionToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 8, // 8 horas
+    });
 
     const response = NextResponse.json({ success: true });
 
@@ -67,15 +78,6 @@ export async function POST(req: Request) {
     );
     response.headers.set("Pragma", "no-cache");
     response.headers.set("Expires", "0");
-
-    // Cookie de sessão
-    response.cookies.set("admin_session", sessionToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 8, // 8 horas
-    });
 
     return response;
   } catch (error) {
