@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
-// 1. Desativa completamente o cache da rota na Vercel e no Next.js
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-// Função de comparação segura para impedir ataques de tempo (Timing Attacks)
 function safeCompare(a: string, b: string): boolean {
   const bufA = Buffer.from(a);
   const bufB = Buffer.from(b);
@@ -19,7 +17,6 @@ function safeCompare(a: string, b: string): boolean {
 
 export async function POST(req: Request) {
   try {
-    // Trata erros de JSON malformado na requisição
     const body = await req.json().catch(() => null);
 
     if (!body || !body.email || !body.password) {
@@ -31,7 +28,6 @@ export async function POST(req: Request) {
 
     const { email, password } = body;
 
-    // Busca variáveis de ambiente
     const adminEmail = process.env.ADMIN_EMAIL;
     const adminPassword = process.env.ADMIN_PASSWORD;
     const authSecret = process.env.AUTH_SECRET;
@@ -41,12 +37,11 @@ export async function POST(req: Request) {
         "Variáveis de ambiente (ADMIN_EMAIL, ADMIN_PASSWORD, AUTH_SECRET) não configuradas."
       );
       return NextResponse.json(
-        { error: "Erro de configuração no servidor. Verifique as variáveis de ambiente." },
+        { error: "Erro de configuração no servidor." },
         { status: 500 }
       );
     }
 
-    // Validação segura de credenciais
     const isEmailValid = safeCompare(email, adminEmail);
     const isPasswordValid = safeCompare(password, adminPassword);
 
@@ -57,17 +52,15 @@ export async function POST(req: Request) {
       );
     }
 
-    // Gera um token seguro em vez de expor o AUTH_SECRET puro no cookie
+    // Gera um token fixo e seguro baseado no AUTH_SECRET + ADMIN_EMAIL
     const sessionToken = crypto
       .createHmac("sha256", authSecret)
-      .update(`${adminEmail}:${Date.now()}`)
+      .update(adminEmail)
       .digest("hex");
 
-    const response = NextResponse.json({
-      success: true,
-    });
+    const response = NextResponse.json({ success: true });
 
-    // 2. Aplica cabeçalhos rígidos para bloquear cache no navegador/dispositivo
+    // Cabeçalhos anti-cache
     response.headers.set(
       "Cache-Control",
       "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
@@ -75,7 +68,7 @@ export async function POST(req: Request) {
     response.headers.set("Pragma", "no-cache");
     response.headers.set("Expires", "0");
 
-    // Gravação segura do cookie de sessão
+    // Cookie de sessão
     response.cookies.set("admin_session", sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
