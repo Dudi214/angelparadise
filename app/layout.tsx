@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Angel Paradise" }],
   creator: "Angel Paradise",
-  metadataBase: new URL("https://angelparadise.vercel.app"), // Substitua pelo seu domínio final
+  metadataBase: new URL("https://angelparadise.vercel.app"),
   alternates: {
     canonical: "/",
   },
@@ -42,11 +42,11 @@ export const metadata: Metadata = {
     title: "Angel Paradise | Passeios Privativos em Angra dos Reis",
     description:
       "A melhor experiência em passeios de lancha privativos em Angra dos Reis e Ilha Grande. Viva momentos inesquecíveis!",
-    url: "https://angelparadise.vercel.app", // Substitua pelo seu domínio final
+    url: "https://angelparadise.vercel.app",
     siteName: "Angel Paradise",
     images: [
       {
-        url: "/og-image.jpeg", // Imagem que aparece ao compartilhar o link no WhatsApp/Instagram
+        url: "/og-image.jpeg",
         width: 1200,
         height: 630,
         alt: "Angel Paradise - Passeios de Lancha em Angra dos Reis",
@@ -57,11 +57,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/logo.png", type: "image/png" }, // Sua logo aparecendo na aba do navegador
+      { url: "/logo.png?v=2", type: "image/png" },
     ],
-    shortcut: "/logo.png",
-    apple: "/logo.png", // Para telas de atalho do iPhone/iOS
+    shortcut: "/logo.png?v=2",
+    apple: "/logo.png?v=2",
   },
   robots: {
     index: true,
