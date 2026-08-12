@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Angel Paradise",
     images: [
       {
-        url: "/og-image.jpeg",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "Angel Paradise - Passeios de Lancha em Angra dos Reis",
@@ -56,11 +56,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: [
-      { url: "/logo.png?v=2", type: "image/png" },
-    ],
-    shortcut: "/logo.png?v=2",
-    apple: "/logo.png?v=2",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   robots: {
     index: true,
