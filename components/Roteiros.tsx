@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Roteiros() {
   const roteiros = [
     {
-      titulo: "Ilhas Exclusivas",
+      titulo: "Paradisíaco",
       destaque: "O cartão postal de Angra",
       imagem: "/paissagem1.jpeg",
       descricao:
@@ -14,7 +14,7 @@ export default function Roteiros() {
         "Ilhas Botinas",
         "Praia da Piedade",
         "Praia do Dentista",
-        "Pitangueira e Vitorino",
+        " Praia das Flechas",
       ],
     },
     {
@@ -24,14 +24,15 @@ export default function Roteiros() {
       descricao:
         "Um mergulho na vida marinha com águas transparentes e natureza preservada. Perfeito para snorkel.",
       paradas: [
-        "Ilhas Cataguás",
+        
         "Lagoa Azul",
         "Praia de Grumixama",
+        "Praia do Araçá",
         "Freguesia de Santana",
       ],
     },
     {
-      titulo: "Águas Tranquilas",
+      titulo: "Águas Quentes",
       destaque: "Relaxamento total",
       imagem: "/paissagem3.jpeg",
       descricao:
@@ -40,6 +41,7 @@ export default function Roteiros() {
         "Ilha de Paquetá",
         "Ilha de Itanhangá",
         "Praia do Laboratório",
+        "Praia Pingo D'Água",
       ],
     },
     {

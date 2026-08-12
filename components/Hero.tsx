@@ -119,15 +119,37 @@ export default function Hero() {
       {/* ALUGUÉIS */}
       <section id="alugueis" className="py-20 bg-slate-50 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          {/* IMAGEM */}
+          {/* SIMULADOR DE TELA DE CELULAR */}
           <motion.div
             initial={{ opacity: 0, x: -80 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 rounded-3xl overflow-hidden shadow-2xl h-[450px]"
+            className="w-full md:w-1/2 flex justify-center items-center"
           >
-            <img src="/casa.jpg" className="w-full h-full object-cover" />
+            {/* CORPO DO CELULAR */}
+            <div className="relative w-[280px] sm:w-[320px] h-[580px] bg-slate-900 rounded-[50px] p-3 shadow-2xl border-4 border-slate-700/50">
+              {/* NOTCH / ILHA DINÂMICA (Topo do celular) */}
+              <div className="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-end px-2">
+                {/* Câmera do celular */}
+                <div className="w-2.5 h-2.5 bg-slate-950 rounded-full border border-slate-800"></div>
+              </div>
+
+              {/* BARRINHA INFERIOR (Home Indicator) */}
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/40 rounded-full z-20"></div>
+
+              {/* TELA INTERNA COM O VÍDEO */}
+              <div className="w-full h-full rounded-[38px] overflow-hidden bg-black relative">
+                <video
+                  src="/piscina.mp4" // Altere para o nome do seu vídeo na pasta public
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </motion.div>
 
           {/* TEXTO */}
@@ -151,7 +173,7 @@ export default function Hero() {
               conforto.
             </p>
 
-            <button className="bg-teal-600 text-white px-8 py-3 rounded-full hover:bg-teal-700">
+            <button className="bg-teal-600 text-white px-8 py-3 rounded-full hover:bg-teal-700 transition shadow-md">
               Conhecer Propriedades
             </button>
           </motion.div>
