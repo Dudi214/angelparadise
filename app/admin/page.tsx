@@ -11,10 +11,9 @@ export default async function AdminPage() {
   const session = cookieStore.get("admin_session")?.value;
   const authSecret = process.env.AUTH_SECRET;
 
-  // Validação rigorosa: verifica se o cookie existe E se o valor coincide com o AUTH_SECRET
+  // Validação rigorosa
   if (!session || !authSecret || session !== authSecret) {
-    // Apaga o cookie corrompido/antigo do navegador automaticamente
-    cookieStore.delete("admin_session");
+    // Redireciona direto para a tela de login se a sessão for inválida
     redirect("/login");
   }
 
